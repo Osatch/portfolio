@@ -46,6 +46,13 @@
 </head>
 
 <body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 selection:bg-brand-500/20 selection:text-brand-700">
+
+  <!-- ====== AJOUT MULTILINGUE : BOUTON FLOTTANT (NE RETIRE RIEN) ====== -->
+  <div id="langSwitcher" class="fixed z-50 right-4 top-4">
+    <button id="langToggle" class="px-3 py-1 rounded-lg bg-brand-600 text-white hover:bg-brand-700 text-sm">EN</button>
+  </div>
+  <!-- ====== FIN AJOUT ====== -->
+
   <header class="sticky top-0 z-40 border-b border-slate-200/60 dark:border-slate-800/80 bg-white/80 dark:bg-slate-950/60 glass">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="h-16 flex items-center justify-between">
@@ -353,6 +360,157 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <!-- ====== AJOUT MULTILINGUE : SCRIPT DE TRADUCTION (NE RETIRE RIEN) ====== -->
+  <script>
+    (function(){
+      const frToEn = new Map([
+        ["Oussama Boumedjmâdjène — Développeur Full-Stack (Django • Vue.js)", "Oussama Boumedjmâdjène — Full-Stack Developer (Django • Vue.js)"],
+        ["Portfolio moderne, épuré et animé. Développeur full-stack Django/Vue.js : temps réel, APIs REST, WebSocket, déploiement Linux/Nginx, automatisation.", "Modern, clean and animated portfolio. Full-stack Django/Vue.js developer: real-time, REST APIs, WebSocket, Linux/Nginx deployment, automation."],
+        ["Accueil","Home"],
+        ["À propos","About"],
+        ["Compétences","Skills"],
+        ["Projets","Projects"],
+        ["Expérience","Experience"],
+        ["Contact","Contact"],
+        ["Développeur Full-Stack","Full-Stack Developer"],
+        ["Spécialisé en Python/Django, Vue.js, systèmes temps réel (WebSocket/Redis), APIs REST, automatisation, et déploiement Linux/Nginx.\n              Conception d’ERP Web & Mobile modulaires pour l’activité fibre optique particuliers.","Specialized in Python/Django, Vue.js, real-time systems (WebSocket/Redis), REST APIs, automation, and Linux/Nginx deployment.\n              Designing modular Web & Mobile ERPs for residential fiber-optic operations."],
+        ["Voir les projets","See projects"],
+        ["Me contacter","Get in touch"],
+        ["À propos","About"],
+        ["Développeur full-stack orienté résultats, je construis des produits fiables et performants. Je travaille sur des architectures pragmatiques,\n          des interfaces claires, et des pipelines de données robustes. Mon focus : valeur métier, qualité, maintenabilité, temps réel, et déploiements propres.","Result-driven full-stack developer building reliable, high-performance products. I focus on pragmatic architectures,\n          clear interfaces, and robust data pipelines. Priorities: business value, quality, maintainability, real-time, and clean deployments."],
+        ["Spécialité","Specialty"],
+        ["Temps réel","Real-time"],
+        ["Automatisation","Automation"],
+        ["Infra","Infra"],
+        ["Compétences","Skills"],
+        ["Mises à jour en continu","Continuously updated"],
+        ["Back-end","Back-end"],
+        ["Vue.js (Options/Composition), Vite","Vue.js (Options/Composition), Vite"],
+        ["Interfaces de tableaux riches","Rich data-table interfaces"],
+        ["Filtres, pagination, modales d’édition","Filters, pagination, edit modals"],
+        ["WebSocket client, états temps réel","WebSocket client, real-time states"],
+        ["Ops & Automatisation","Ops & Automation"],
+        ["Monitoring simple, scripts de maintenance","Light monitoring, maintenance scripts"],
+        ["CI légères, bonnes pratiques sécurité","Light CI, security best practices"],
+        ["Projets","Projects"],
+        ["Tous","All"],
+        ["Web","Web"],
+        ["Temps réel","Real-time"],
+        ["ERP Web & Mobile (fibre)","Web & Mobile ERP (fiber)"],
+        ["Système ERP temps réel","Real-time ERP system"],
+        ["Gestion interventions, suivi terrain, facturation, recrutement, inventaire, échanges live.","Intervention management, field tracking, invoicing, recruiting, inventory, live collaboration."],
+        ["Stats & tableaux","Stats & tables"],
+        ["Dashboards comparatifs","Comparative dashboards"],
+        ["OK vs NOK, catégories d’échec, exports Excel avec formats/couleurs.","OK vs NOK, failure categories, Excel exports with formatting/colors."],
+        ["Scraping","Scraping"],
+        ["Collecte Selenium","Selenium collection"],
+        ["Filtres numéros 06/07, tous départements, export Excel structuré.","Phone filters 06/07, all departments, structured Excel export."],
+        ["Expérience","Experience"],
+        ["Candle Call — Développeur logiciels","Candle Call — Software Developer"],
+        ["mars 2025 – aujourd’hui","Mar 2025 – present"],
+        ["Développement d’un ERP Web & Mobile modulaire en temps réel (fibre optique particuliers) : interventions, terrain, facturation, recrutement, inventaire, échanges live.","Developing a modular real-time Web & Mobile ERP (residential fiber): interventions, field ops, invoicing, recruiting, inventory, live collaboration."],
+        ["ubc — Freelance","ubc — Freelance"],
+        ["oct. 2024 – fév. 2025","Oct 2024 – Feb 2025"],
+        ["Scraping Selenium, filtrage numéros 06/07, export Excel (colonne Département).","Selenium scraping, filtering 06/07 numbers, Excel export (Department column)."],
+        ["École Supérieure des Transmissions 1RN","Higher School of Transmissions 1RN"],
+        ["janv. 2023 – sept. 2024","Jan 2023 – Sep 2024"],
+        ["Service national : intégration Odoo, automatisations.","National service: Odoo integration, automations."],
+        ["SGS Béjaïa","SGS Béjaïa"],
+        ["juil. 2022 – sept. 2023","Jul 2022 – Sep 2023"],
+        ["Outils internes, maintenance, automatisations.","Internal tools, maintenance, automations."],
+        ["Contact","Contact"],
+        ["Réponse rapide. Tous les champs sont requis.","Quick response. All fields are required."],
+        ["Nom","Name"],
+        ["E-mail","Email"],
+        ["Sujet","Subject"],
+        ["Message","Message"],
+        ["Envoyer","Send"],
+        ["Ou envoyer via votre boîte mail","Or send via your mailbox"],
+        ["E-mail direct : ","Direct email: "],
+        ["Tous droits réservés.","All rights reserved."]
+      ]);
+
+      // construit la map inverse pour FR
+      const enToFr = new Map(Array.from(frToEn.entries()).map(([fr,en])=>[en,fr]));
+
+      function replaceInTextNode(node, dict){
+        const original = node.nodeValue;
+        const trimmed = original.replace(/\s+/g,' ').trim();
+        if(!trimmed) return;
+        // tente correspondance exacte (avec sauts conservés)
+        for (const [src, dst] of dict.entries()){
+          if (trimmed === src) {
+            const leading = original.match(/^\s*/)[0];
+            const trailing = original.match(/\s*$/)[0];
+            node.nodeValue = leading + dst + trailing;
+            return;
+          }
+        }
+      }
+
+      function walkReplace(root, dict){
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+          acceptNode(node){
+            // ignorer scripts/styles
+            if (node.parentElement && (node.parentElement.tagName === 'SCRIPT' || node.parentElement.tagName === 'STYLE')) return NodeFilter.FILTER_REJECT;
+            // ignorer textes vides
+            if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        });
+        const nodes = [];
+        while(walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(n=>replaceInTextNode(n, dict));
+      }
+
+      function setMeta(lang){
+        if(lang==='en'){
+          document.title = "Oussama Boumedjmâdjène — Full-Stack Developer (Django • Vue.js)";
+          const m = document.querySelector('meta[name="description"]');
+          if(m) m.setAttribute('content',"Modern, clean and animated portfolio. Full-stack Django/Vue.js developer: real-time, REST APIs, WebSocket, Linux/Nginx deployment, automation.");
+        } else {
+          document.title = "Oussama Boumedjmâdjène — Développeur Full-Stack (Django • Vue.js)";
+          const m = document.querySelector('meta[name="description"]');
+          if(m) m.setAttribute('content',"Portfolio moderne, épuré et animé. Développeur full-stack Django/Vue.js : temps réel, APIs REST, WebSocket, déploiement Linux/Nginx, automatisation.");
+        }
+      }
+
+      function setHtmlLang(lang){
+        document.documentElement.setAttribute('lang', lang);
+      }
+
+      function setLanguage(lang){
+        if(lang==='en'){
+          // part de FR (source) => EN
+          walkReplace(document.body, frToEn);
+        }else{
+          // part d'EN => FR
+          walkReplace(document.body, enToFr);
+        }
+        setMeta(lang);
+        setHtmlLang(lang);
+        localStorage.setItem('portfolio_lang', lang);
+        const btn = document.getElementById('langToggle');
+        if(btn) btn.textContent = (lang==='en' ? 'FR' : 'EN');
+      }
+
+      // init (EN par défaut)
+      document.addEventListener('DOMContentLoaded', function(){
+        const stored = localStorage.getItem('portfolio_lang') || 'en';
+        setLanguage(stored);
+        const btn = document.getElementById('langToggle');
+        if(btn){
+          btn.addEventListener('click', function(){
+            const cur = localStorage.getItem('portfolio_lang') || 'en';
+            setLanguage(cur==='en' ? 'fr' : 'en');
+          });
+        }
+      });
+    })();
+  </script>
+  <!-- ====== FIN AJOUT ====== -->
+
   <script>
     const root = document.documentElement;
     const key = 'theme';
